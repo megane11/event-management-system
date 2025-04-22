@@ -108,3 +108,4 @@ EMS/
 3. Import the SQL database found in /docs/emsdb.sql
 
 4. Run the project
+    
