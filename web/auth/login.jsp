@@ -22,7 +22,16 @@
     </head>
 
     <body class="w-screen h-auto flex flex-col items-center p-0">
-        <form action="" method="post" class="m-auto md:min-w-[500px] md:max-w-[50%] lg:max-w-[50%] flex flex-col items-center h-auto gap-4 p-2 md:px-9 md:py-4">
+        <%-- Display success message if present --%>
+        <%
+            String message = request.getParameter("message");
+            if (message != null) {
+        %>
+            <p class="text-green-300"><%= message %></p>
+        <%
+            }
+        %>
+        <form action="../LoginServlet" method="post" class="m-auto md:min-w-[500px] md:max-w-[50%] lg:max-w-[50%] flex flex-col items-center h-auto gap-4 p-2 md:px-9 md:py-4">
             <h1 class="text-xl font-semibold">Login</h1>
 
             <div class='w-full flex flex-col relative'>

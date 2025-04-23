@@ -4,17 +4,33 @@
  */
 package com.ems.controller;
 
+import com.ems.dao.UserDAO;
+import com.ems.model.User;
+import com.ems.util.DBUtil;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
+import java.io.File;
 
 /**
  *
  * @author afany
  */
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024, // 1MB
+    maxFileSize = 1024 * 1024 * 5,   // 5MB
+    maxRequestSize = 1024 * 1024 * 10 // 10MB
+)
 public class RegisterServlet extends HttpServlet {
 
     /**
@@ -26,20 +42,61 @@ public class RegisterServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+       
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");
+        String gender = request.getParameter("gender");
+
+        // Handle profile image upload
+
+        try{
+            Part filePart = request.getPart("profile_image");
+            String profileImage = null;
+
+            if (filePart != null && filePart.getSize() > 0) {
+                String originalName = filePart.getSubmittedFileName();
+                String safeName = originalName.replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
+                String fileName = UUID.randomUUID().toString() + "_" + safeName;
+
+                // Validate file type
+                String contentType = filePart.getContentType();
+                if (!contentType.startsWith("image/")) {
+                    throw new ServletException("Invalid file type. Please upload an image.");
+                }
+
+                String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) uploadDir.mkdir();
+
+                filePart.write(uploadPath + File.separator + fileName);
+                profileImage = "uploads/" + fileName; // Store this in DB
+            }
+            // Create a new User object
+            User user = new User(name, email, password, role, gender, profileImage);
+
+            // Register the user using UserDAO
+            UserDAO userDAO = new UserDAO();
+            boolean isRegistered = userDAO.registerUser(user);
+
+            // Redirect based on the result
+            if (isRegistered) {
+                // Redirect to login page with a success message
+                response.sendRedirect("auth/login.jsp?message=Account created successfully! Please log in.");
+            } else {
+                // Redirect back to register page with an error message
+                response.sendRedirect("auth/register.jsp?error=Failed to create account. Please try again.");
+            }
+
+        }catch (ServletException e){
+            e.printStackTrace();
+            response.sendRedirect("auth/register.jsp?error=File upload failed. Please try again.");
+            return;
+        }catch (IOException e){
         }
     }
 

@@ -20,8 +20,17 @@
         <!-- Script for registration -->
         <script src="../assets/js/register.js" defer></script>
     </head>
-    <body class="flex items-center justify-center h-screen">
-        <form method='POST' action='' class='m-auto flex flex-col min-w-[400px] gap-5'>
+    <body class="flex items-center flex-col justify-center h-screen">
+        <%-- Display error message if present --%>
+        <%
+            String error = request.getParameter("error");
+            if (error != null) {
+        %>
+            <p class="text-red-400"><%= error %></p>
+        <%
+            }
+        %>
+        <form method='POST' action='../RegisterServlet' class='m-auto flex flex-col min-w-[400px] gap-5' enctype="multipart/form-data">
             <h1 class="text-center text-xl w-full font-semibold">
                 Create an Account Today !!
             </h1>
@@ -41,10 +50,10 @@
                 <!-- Other inputs -->
 
                 <div class='w-full flex flex-col relative'>
-                    <label for="username" class="">
+                    <label for="name" class="">
                         Full Name
                     </label>
-                    <input required type='text' id="username" name='username' placeholder="Enter full name" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
+                    <input required type='text' id="name" name='name' placeholder="Enter full name" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
                 </div>
 
                 <div class='w-full flex flex-col relative'>
