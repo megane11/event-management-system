@@ -45,4 +45,33 @@ public class UserDAO {
             return false;
         }
     }
+
+    // Login a user
+
+    public User loginUser(String email, String password) {
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            stmt.setString(2, password); // Password should ideally be hashed
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                // Create a User object from the result set
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
+                user.setGender(rs.getString("gender"));
+                user.setProfileImage(rs.getString("profile_image"));
+                user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                return user;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // Return null if no user is found
+    }
 }

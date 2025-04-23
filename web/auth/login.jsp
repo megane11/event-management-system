@@ -25,9 +25,16 @@
         <%-- Display success message if present --%>
         <%
             String message = request.getParameter("message");
+            String error = (String) request.getAttribute("error");
+
             if (message != null) {
         %>
             <p class="text-green-300"><%= message %></p>
+        <%
+            }
+            else if (error != null) {
+        %>
+            <p class="text-red-400"><%= error %></p>
         <%
             }
         %>
