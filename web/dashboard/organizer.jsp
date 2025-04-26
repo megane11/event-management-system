@@ -21,7 +21,7 @@
         %>
         <h1>Welcome, Organizer <%= user.getName() %>!</h1>
         <!-- image -->
-        <img src="<%= user.getProfileImage() %>" alt="Profile Image" class="rounded-full w-32 h-32">
+        <img src="${pageContext.request.contextPath}/uploads/<%= user.getProfileImage() %>" alt="Profile Image" class="rounded-full w-32 h-5">
         <p>Profile Image: <%= user.getProfileImage() %></p>
         <p>Email: <%= user.getEmail() %></p>
         <p>This is the organizer dashboard.</p>

@@ -7,6 +7,7 @@ package com.ems.controller;
 import com.ems.dao.UserDAO;
 import com.ems.model.User;
 import com.ems.util.DBUtil;
+import com.ems.util.FileUploadUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,26 +78,8 @@ public class RegisterServlet extends HttpServlet {
         // Handle profile image upload
         try{
             Part filePart = request.getPart("profile_image");
-            String profileImage = null;
-
-            if (filePart != null && filePart.getSize() > 0) {
-                String originalName = filePart.getSubmittedFileName();
-                String safeName = originalName.replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
-                String fileName = UUID.randomUUID().toString() + "_" + safeName;
-
-                // Validate file type
-                String contentType = filePart.getContentType();
-                if (!contentType.startsWith("image/")) {
-                    throw new ServletException("Invalid file type. Please upload an image.");
-                }
-
-                String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
-                File uploadDir = new File(uploadPath);
-                if (!uploadDir.exists()) uploadDir.mkdir();
-
-                filePart.write(uploadPath + File.separator + fileName);
-                profileImage = "uploads/" + fileName; // Store this in DB
-            }
+            String profileImage = FileUploadUtil.uploadFile(filePart, getServletContext());
+            
             // Create a new User object
             User user = new User(name, email, password, role, gender, profileImage);
 
