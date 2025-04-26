@@ -103,9 +103,14 @@ EMS/
    ```bash
    git clone https://github.com/megane11/event-management-system.git
 
-2. Open the cloned project in netbeans IDE
+2. Import the SQL database found in /docs/emsdb.sql
 
-3. Import the SQL database found in /docs/emsdb.sql
+3. Open the cloned project in netbeans IDE
 
-4. Run the project
+4. Connect to the database
+   - Open the Services tab
+   - Open Databases > Drivers > MySQL (Connector/J driver)
+   - Fill in the required credentials, test the connection and finish
+
+5. Run the project
     

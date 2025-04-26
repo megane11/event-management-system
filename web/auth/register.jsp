@@ -96,7 +96,7 @@
                     <label for="cpassword" class="">
                         Confirm Password
                     </label>
-                    <input required type='cpassword' name='cpassword' id="cpassword" placeholder="Confirm Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
+                    <input required type='password' name='cpassword' id="cpassword" placeholder="Confirm Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
 
                     <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-accent bg-white" onclick="toggleVisibility(this)">
                         <i class="far fa-eye"></i>

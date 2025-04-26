@@ -49,11 +49,32 @@ public class RegisterServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String cpassword = request.getParameter("cpassword");
         String role = request.getParameter("role");
         String gender = request.getParameter("gender");
 
-        // Handle profile image upload
+        String errorMessage = null;
+        // Validate input fields
+        if (name == null || name.isEmpty()) {
+            errorMessage = "Name is required.";
+        } else if (email == null || email.isEmpty()) {
+            errorMessage = "Email is required.";
+        } else if (password == null || password.isEmpty()) {
+            errorMessage = "Password is required.";
+        } else if (cpassword == null || cpassword.isEmpty()) {
+            errorMessage = "Confirm Password is required.";
+        } else if (!password.equals(cpassword)) {
+            errorMessage = "Passwords do not match.";
+        } else if (role == null || role.isEmpty()) {
+            errorMessage = "Role is required.";
+        }
 
+        // If there is an error, redirect back to the register page with an error message
+        if (errorMessage != null) {
+            response.sendRedirect("auth/register.jsp?error=" + errorMessage);
+            return;
+        }
+        // Handle profile image upload
         try{
             Part filePart = request.getPart("profile_image");
             String profileImage = null;
