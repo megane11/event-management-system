@@ -13,40 +13,46 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.Part;
 
 public class FileUploadUtil {
 
     public static String uploadFile(Part filePart, ServletContext context) throws IOException {
-        if (filePart == null || filePart.getSize() == 0) {
-            return null; // No file uploaded
+        if (filePart != null && filePart.getSize() > 0) {
+            String originalName = filePart.getSubmittedFileName();
+            String safeName = originalName.replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
+            String fileName = UUID.randomUUID().toString() + "_" + safeName;
+
+            // Validate file type
+            String contentType = filePart.getContentType();
+            if (!contentType.startsWith("image/")) {
+                throw new IOException("Invalid file type. Only images are allowed.");
+            }
+
+            // Get path to build directory first
+            String buildPath = context.getRealPath("");
+            
+            // Navigate to project root (up from build/web to project root)
+            File buildDir = new File(buildPath);
+            File projectRoot = buildDir.getParentFile().getParentFile();
+            
+            // Create uploads directory in project root
+            String uploadPath = projectRoot.getAbsolutePath() + File.separator + "uploads";
+            
+            System.out.println("Upload Path: " + uploadPath);
+            File uploadDir = new File(uploadPath);
+            
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
+
+            // Save the file
+            filePart.write(uploadPath + File.separator + fileName);
+            
+            return fileName;
         }
 
-        // Validate file type
-        String contentType = filePart.getContentType();
-        if (!contentType.startsWith("image/")) {
-            throw new IOException("Invalid file type. Only images are allowed.");
-        }
-
-        // Generate a safe file name
-        String originalName = filePart.getSubmittedFileName();
-        String safeName = originalName.replaceAll("[^a-zA-Z0-9\\.\\-]", "_");
-        String fileName = UUID.randomUUID().toString() + "_" + safeName;
-
-        // Get uploads directory (outside build folder)
-        String projectPath = context.getRealPath("/");
-        File webRoot = new File(projectPath);
-        File projectRoot = webRoot.getParentFile().getParentFile();
-        File uploadDir = new File(projectRoot, "uploads");
-
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs(); // Create uploads directory if it doesn't exist
-        }
-
-        // Save the file
-        filePart.write(uploadDir.getAbsolutePath() + File.separator + fileName);
-
-        // Return the relative path to store in the DB (you will serve from /uploads/filename)
-        return "uploads/" + fileName;
+        return null; // No file uploaded
     }
 }

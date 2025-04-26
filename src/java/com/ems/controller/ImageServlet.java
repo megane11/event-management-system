@@ -16,43 +16,52 @@ import javax.servlet.http.*;
 
 @WebServlet("/uploads/*")
 public class ImageServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-
-        String requestedImage = request.getPathInfo(); // Get the path after /uploads/
-        if (requestedImage == null) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404
+        
+        // Get the requested file name from the URL path
+        String pathInfo = request.getPathInfo();
+        if (pathInfo == null || pathInfo.equals("/")) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-
-        // Build real file path
-        String projectPath = getServletContext().getRealPath("/");
-        File webRoot = new File(projectPath);
-        File projectRoot = webRoot.getParentFile().getParentFile();
-        String uploadPath = projectRoot.getAbsolutePath() + File.separator + "uploads";
-
-        File imageFile = new File(uploadPath, requestedImage);
-
-        if (!imageFile.exists()) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND); // 404
+        
+        // Remove the leading slash
+        String filename = pathInfo.substring(1);
+        
+        // Navigate to project root from build directory
+        String buildPath = getServletContext().getRealPath("");
+        File buildDir = new File(buildPath);
+        File projectRoot = buildDir.getParentFile().getParentFile();
+        
+        // Create the full file path
+        String filePath = projectRoot.getAbsolutePath() + File.separator + "uploads" + File.separator + filename;
+        File file = new File(filePath);
+        
+        // Check if file exists
+        if (!file.exists()) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-
-        // Set content type based on file type
-        String contentType = getServletContext().getMimeType(imageFile.getName());
+        
+        // Set content type based on file extension
+        String contentType = getServletContext().getMimeType(filename);
         if (contentType == null) {
             contentType = "application/octet-stream";
         }
         response.setContentType(contentType);
-        response.setContentLength((int) imageFile.length());
-
-        // Copy file to response output
-        try (FileInputStream in = new FileInputStream(imageFile);
-             OutputStream out = response.getOutputStream()) {
-
+        
+        // Set content length
+        response.setContentLength((int)file.length());
+        
+        // Copy the file to the response output stream
+        try (FileInputStream in = new FileInputStream(file);
+            OutputStream out = response.getOutputStream()) {
+            
             byte[] buffer = new byte[4096];
             int bytesRead;
-
+            
             while ((bytesRead = in.read(buffer)) != -1) {
                 out.write(buffer, 0, bytesRead);
             }
