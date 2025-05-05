@@ -96,6 +96,7 @@ EMS/
 - Apache Tomcat (v9+)
 - MySQL server
 - Git
+- Node JS (~v22.14.0)
 
 ### 🚀 Setup Instructions
 
@@ -112,5 +113,11 @@ EMS/
    - Open Databases > Drivers > MySQL (Connector/J driver)
    - Fill in the required credentials, test the connection and finish
 
-5. Run the project
+5. Start the node environment to load the styles
+   - Open the terminal in the root of the project
+   - run the command
+   ```bash
+   npm install
+
+6. Run the project
     

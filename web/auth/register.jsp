@@ -1,26 +1,9 @@
-<%-- 
-    Document   : register
-    Created on : Apr 22, 2025, 8:08:35 PM
-    Author     : afany
---%>
+<!-- include the header file -->
+<jsp:include page="../includes/navbar.jsp">
+    <jsp:param name="title" value="Create Account - Join us today"/>
+</jsp:include>
+    <main class="flex items-center flex-col justify-center h-screen">
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Student</title>
-        
-        <!-- tailwind CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-        <!-- Link to fontawesome fonts -->
-        <link rel="stylesheet" href="../assets/font/css/all.css">
-
-        <!-- Script for registration -->
-        <script src="../assets/js/register.js" defer></script>
-    </head>
-    <body class="flex items-center flex-col justify-center h-screen">
         <%-- Display error message if present --%>
         <%
             String error = request.getParameter("error");
@@ -53,28 +36,28 @@
                     <label for="name" class="">
                         Full Name
                     </label>
-                    <input required type='text' id="name" name='name' placeholder="Enter full name" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
+                    <input required type='text' id="name" name='name' placeholder="Enter full name" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-violet-400 transition-all ease-in-out duration-300" />
                 </div>
 
                 <div class='w-full flex flex-col relative'>
                     <label for="email" class="">
                         Email 
                     </label>
-                    <input required type='email' name='email' id="email" placeholder="Enter Email Address" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
+                    <input required type='email' name='email' id="email" placeholder="Enter Email Address" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-violet-400 transition-all ease-in-out duration-300" />
                 </div>
 
                 <!-- Gender and role -->
                 <div class="flex flex-col sm:flex-row gap-8 w-full items-center justify-between">
                     <div class="w-full flex flex-col">
                         <label for="role">Role</label>
-                        <select class="border-2 border-slate-300 outline-none p-2 focus:border-purple-400 transition-all ease-in-out duration-600" name="role" id="role">
+                        <select class="border-2 border-slate-300 outline-none p-2 focus:border-violet-400 transition-all ease-in-out duration-600" name="role" id="role">
                             <option value="organizer">Organizer</option>
                             <option value="attendee" selected>Attendee</option>
                         </select>
                     </div>
                     <div class="w-full flex flex-col">
                         <label for="gender">Gender</label>
-                        <select class="border-2 border-slate-300 outline-none p-2 focus:border-purple-400 transition-all ease-in-out duration-600" name="gender" id="gender">
+                        <select class="border-2 border-slate-300 outline-none p-2 focus:border-violet-400 transition-all ease-in-out duration-600" name="gender" id="gender">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
@@ -85,9 +68,9 @@
                     <label for="password" class="">
                         Password
                     </label>
-                    <input required type='password' name='password' id="password" placeholder="Enter Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
+                    <input required type='password' name='password' id="password" placeholder="Enter Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-violet-400 transition-all ease-in-out duration-300" />
 
-                    <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-accent bg-white" onclick="toggleVisibility(this)">
+                    <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-violet-400 bg-white" onclick="toggleVisibility(this)">
                         <i class="far fa-eye"></i>
                     </span>
                 </div>
@@ -96,9 +79,9 @@
                     <label for="cpassword" class="">
                         Confirm Password
                     </label>
-                    <input required type='password' name='cpassword' id="cpassword" placeholder="Confirm Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
+                    <input required type='password' name='cpassword' id="cpassword" placeholder="Confirm Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-violet-400 transition-all ease-in-out duration-300" />
 
-                    <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-accent bg-white" onclick="toggleVisibility(this)">
+                    <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-violet-400 bg-white" onclick="toggleVisibility(this)">
                         <i class="far fa-eye"></i>
                     </span>
                 </div>
@@ -108,7 +91,8 @@
             <button type='submit' class='w-full bg-violet-400 text-white text-medium text-center py-2'>
                 Create Account
             </button>
-            <p class="text-sm text-secondary">Already have an account? <a href="login.jsp" class="text-accent">Login</a></p>
+            <p class="text-sm text-secondary">Already have an account? <a href="login.jsp" class="text-violet-400">Login</a></p>
         </form>
+    </main>
     </body>
 </html>

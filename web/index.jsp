@@ -5,27 +5,28 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Event Management System</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    </head>
-    <body class="py-5 flex flex-col justify-center w-screen items-center">
-        <h1 class='text-green-400 text-2xl text-center font-medium mb-2 capitalize'>Welcome to the Centralized Event Management System</h1>
+<!-- include the header file -->
+<jsp:include page="includes/navbar.jsp">
+    <jsp:param name="title" value="Home Page"/>
+</jsp:include>
 
-        <!-- anchor to displayStudentServlet -->
+<main>
+    <h1 class='text-green-400 text-2xl text-center font-medium mb-2 capitalize'>Welcome to the Centralized Event Management System, EventStar</h1>
 
-        <div class='flex items-center gap-5 p-4'>
-            <a href='auth/login.jsp' class='border border-slate-200 text-medium text-black px-3 py-2 rounded-xs text-normal'>
-                Sign In
-            </a>
-            <a href='auth/register.jsp' class='border border-slate-200 text-medium text-black px-3 py-2 rounded-xs text-normal'>
-                Sign Up
-            </a>
-        </div>
-    </body>
+    <!-- anchor to displayStudentServlet -->
+
+    <div class='flex items-center gap-5 p-4'>
+        <a href='auth/login.jsp' class='border border-slate-200 text-medium text-black px-3 py-2 rounded-xs text-normal'>
+            Sign In
+        </a>
+        <a href='auth/register.jsp' class='border border-slate-200 text-medium text-black px-3 py-2 rounded-xs text-normal'>
+            Sign Up
+        </a>
+    </div>
+</main>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
 </html>

@@ -45,16 +45,20 @@
                 <label for="email" class="">
                     Email 
                 </label>
-                <input required type='email' name='email' id="email" placeholder="Enter Email Address" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
+                <input required type='email' name='email' id="email" placeholder="Enter Email Address" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-violet-400 transition-all ease-in-out duration-300" />
+
+                <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-violet-400 bg-white">
+                    <i class="fas fa-envelope"></i>
+                </span>
             </div>
 
             <div class='w-full flex flex-col relative'>
                 <label for="password" class="">
                     Password
                 </label>
-                <input required type='password' name='password' id="password" placeholder="Enter Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-purple-400 transition-all ease-in-out duration-300" />
+                <input required type='password' name='password' id="password" placeholder="Enter Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-violet-400 transition-all ease-in-out duration-300" />
 
-                <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-accent bg-white" onclick="toggleVisibility(this)">
+                <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-violet-400 bg-white" onclick="toggleVisibility(this)">
                     <i class="far fa-eye"></i>
                 </span>
             </div>
@@ -72,7 +76,7 @@
                 Sign In
             </button>
             
-            <p class="text-center">Don't have an account? <a href="register.jsp" class="text-accent hover:underline">Create One</a></p>
+            <p class="text-center">Don't have an account? <a href="register.jsp" class="text-violet-400 hover:underline">Create One</a></p>
         </form>
     </body>
 </html>
