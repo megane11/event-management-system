@@ -1,27 +1,8 @@
-<%-- 
-    Document   : login
-    Created on : Apr 22, 2025, 8:08:26 PM
-    Author     : afany
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
-
-        <!-- tailwind CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-        <!-- Link to fontawesome fonts -->
-        <link rel="stylesheet" href="../assets/font/css/all.css">
-
-        <!-- Script for registration -->
-        <script src="../assets/js/register.js"></script>
-    </head>
-
-    <body class="w-screen h-auto flex flex-col items-center p-0">
+<!-- include the header file -->
+<jsp:include page="../includes/navbar.jsp">
+    <jsp:param name="title" value="Login - Welcome Back"/>
+</jsp:include>
+    <main class="flex items-center flex-col justify-center">
         <%-- Display success message if present --%>
         <%
             String message = request.getParameter("message");
@@ -45,9 +26,9 @@
                 <label for="email" class="">
                     Email 
                 </label>
-                <input required type='email' name='email' id="email" placeholder="Enter Email Address" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-violet-400 transition-all ease-in-out duration-300" />
+                <input required type='email' name='email' id="email" placeholder="Enter Email Address" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-accent transition-all ease-in-out duration-300" />
 
-                <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-violet-400 bg-white">
+                <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-accent bg-white">
                     <i class="fas fa-envelope"></i>
                 </span>
             </div>
@@ -56,9 +37,9 @@
                 <label for="password" class="">
                     Password
                 </label>
-                <input required type='password' name='password' id="password" placeholder="Enter Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-violet-400 transition-all ease-in-out duration-300" />
+                <input required type='password' name='password' id="password" placeholder="Enter Password" class="placeholder:text-xs placeholder:text-secondary placeholder:font-normal outline-none p-2 w-full bg-transparent border-2 border-slate-300 focus:border-accent transition-all ease-in-out duration-300" />
 
-                <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-violet-400 bg-white" onclick="toggleVisibility(this)">
+                <span class="absolute transform right-1 top-[70%] translate-y-[-50%] size-[30px] rounded-full inline-flex items-center justify-center text-sm text-accent bg-white" onclick="toggleVisibility(this)">
                     <i class="far fa-eye"></i>
                 </span>
             </div>
@@ -72,11 +53,12 @@
             </div>
 
             <!-- Submit Button -->
-            <button type='submit' class='w-full bg-violet-400 text-white text-medium text-center py-2'>
+            <button type='submit' class='w-full bg-accent text-white text-medium text-center py-2'>
                 Sign In
             </button>
             
-            <p class="text-center">Don't have an account? <a href="register.jsp" class="text-violet-400 hover:underline">Create One</a></p>
+            <p class="text-center">Don't have an account? <a href="register.jsp" class="text-accent hover:underline">Create One</a></p>
         </form>
+        </main>
     </body>
 </html>

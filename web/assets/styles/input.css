@@ -44,22 +44,24 @@ html{
   .container{
     @apply mx-auto px-1 max-w-[840px];
   }
-  
   .btn {
     @apply px-4 py-2 font-medium text-base min-w-32 min-h-[45px] transition duration-150 ease-in-out hover:opacity-75;
   }
   .btn-primarybtn {
-      @apply bg-accent text-white hover:opacity-75;
+      @apply bg-accent text-white;
   }
   .btn-secondarybtn {
-      @apply bg-primary text-white hover:opacity-75 border border-border_clr;
+      @apply bg-primary text-white border border-border_clr;
   }
 }
 
 @layer utilities{
-  .default_transition{
-    @apply transition-all duration-300 ease-in-out;
-}
+    .default_transition{
+        @apply transition-all duration-300 ease-in-out;
+    }
+    .flexbox{
+        @apply flex items-center justify-center gap-3
+    }
 }
 
 .nav_active, .nav_item:hover{
