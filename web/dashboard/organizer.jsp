@@ -6,12 +6,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.ems.model.User"%>
 <%@page import="javax.servlet.http.HttpSession"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Organizer Dashboard</title>
-    </head>
-    <body>
+
+    <!-- include the header file -->
+    <jsp:include page="../includes/dashboard/header.jsp">
+        <jsp:param name="title" value="Organizer Dashboard" />
+    </jsp:include>
+    
         <%
             User user = (User) session.getAttribute("user");
             if (user == null) {
@@ -19,13 +19,8 @@
                 return;
             }
         %>
-        <h1>Welcome, Organizer <%= user.getName() %>!</h1>
-        <!-- image -->
-        <img src="${pageContext.request.contextPath}/uploads/<%= user.getProfileImage() %>" alt="Profile Image" class="rounded-full w-32 h-5">
-        <p>Profile Image: <%= user.getProfileImage() %></p>
-        <p>Email: <%= user.getEmail() %></p>
-        <p>This is the organizer dashboard.</p>
-
-        <p><a href="../LogoutServlet">Logout</a></p>
+        
+        <!-- SideBar -->  
+        <%@include file='../includes/dashboard/organizer-sidebar.jsp'%>
     </body>
 </html>

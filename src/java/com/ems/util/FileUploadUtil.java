@@ -11,6 +11,8 @@ package com.ems.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -54,5 +56,10 @@ public class FileUploadUtil {
         }
 
         return null; // No file uploaded
+    }
+
+    public static String readFileAsString(ServletContext context, String relativePath) throws IOException {
+        String fullPath = context.getRealPath(relativePath);
+        return new String(Files.readAllBytes(Paths.get(fullPath)));
     }
 }

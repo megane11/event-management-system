@@ -1,4 +1,4 @@
-<div class="relative w-full overflow-hidden h-[80vh]">
+<section class="container relative overflow-hidden h-[80vh] p-4">
     <div id="carouselSlides" class="flex transition-transform duration-700 ease-in-out w-full h-full">
         <div class="w-full flex-shrink-0 relative">
             <img src="<%= request.getContextPath() %>/assets/images/slider/hero-1.jpg"
@@ -35,4 +35,4 @@
         class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full hover:bg-opacity-70">&#10094;</button>
     <button onclick="nextSlide()"
         class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full hover:bg-opacity-70">&#10095;</button>
-</div>
+</section>
