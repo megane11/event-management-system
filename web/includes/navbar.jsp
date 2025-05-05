@@ -7,14 +7,13 @@
     <head>
         <%@include file="/includes/header.jsp" %>
         <script src="<%= request.getContextPath() %>/assets/js/navbar.js" defer></script>
-        
         <title>
             <%= pageTitle %>
         </title>
     </head>
 
     <body class="py-5 flex flex-col justify-center w-screen items-center">
-        <header class="w-full flex flex-col z-20">
+        <header class="w-full flex flex-col z-20 shadow-xs">
             
             <nav class="container flex items-center justify-around md:justify-between py-1 px-3 relative z-10 bg-white">
                 <!-- <button type="button"
